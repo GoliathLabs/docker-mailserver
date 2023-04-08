@@ -224,12 +224,19 @@ function __rspamd__setup_greylisting
 # succeeds.
 function __rspamd__setup_hfilter_group
 {
+  local MODULE_FILE='/etc/rspamd/local.d/hfilter_group.conf'
   if [[ ${RSPAMD_HFILTER} -eq 1 ]]
   then
     __rspamd__log 'debug' 'Hfilter (group) module is enabled'
+    if [[ ${RSPAMD_HFILTER_HOSTNAME_UNKNOWN_SCORE} -ne 6 ]]
+    then
+      sed -i -E \
+        "s|(.*score =).*(# __TAG__HFILTER_HOSTNAME_UNKNOWN)|\1 ${RSPAMD_HFILTER_HOSTNAME_UNKNOWN_SCORE}; \2|g" \
+        "${MODULE_FILE}"
+    fi
   else
     __rspamd__log 'debug' 'Disabling Hfilter (group) module'
-    rm -f /etc/rspamd/local.d/hfilter_group.conf
+    rm -f "${MODULE_FILE}"
   fi
 }
 
