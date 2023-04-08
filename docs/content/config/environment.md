@@ -358,6 +358,21 @@ When enabled,
 - **0** => Disabled
 - 1 => Enabled
 
+#### RSPAMD_HFILTER
+
+Can be used to enable or diable the [Hfilter group module][rspamd-docs-hfilter-group-module].
+
+- 0 => Disabled
+- **1** => Enabled
+
+[rspamd-docs-hfilter-group-module]: https://www.rspamd.com/doc/modules/hfilter.html
+
+#### RSPAMD_HFILTER_HOSTNAME_UNKNOWN_SCORE
+
+Can be used to control the score when the [`HFILTER_HOSTNAME_UNKNOWN` symbol](#rspamd_hfilter) applies. A higher score is more punishing. Setting it to 15 is equivalent to rejecting the email when the check fails.
+
+Default: 6
+
 #### Reports
 
 ##### PFLOGSUMM_TRIGGER
